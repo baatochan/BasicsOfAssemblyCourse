@@ -25,24 +25,24 @@ int $SYSCALL32
 cmpl $1, %eax # jesli wczytal wiecej/mniej niz jeden znak/bajt wyjdz
 jne exit # oznacza to albo koniec pliku albo blad odczytu
 
-cmpl $'A', (%ecx)
+cmpb $'A, (%ecx)
 jl out #jesli w buforze znak mniejszy niz A, od razu go wypisz
-cmpl $'Z', (%ecx)
+cmpb $'Z, (%ecx)
 jg out #jesli w buforze znak wiekszy niz Z, od razu go wypisz
 
 addl $OFFSET, (%ecx) #jesli w buforze znak pomiedzy A i Z, dodaj przesuniecie
 check:
-cmpl $'Z', (%ecx)
+cmpb $'Z, (%ecx)
 jg tooBig #jesli po dodaniu znak za duzy, zajmij sie nim
-cmpl $'A', (%ecx)
+cmpb $'A, (%ecx)
 jl tooSmall #jesli po dodaniu znak za maly, zajmij sie nim (offset moze byc ujemny)
 jmp out #jesli znak nadal znajduje sie w przedziale, po prostu go wypisz
 
 tooBig:
-subl $26, (%ecx) #jesli za duzy, odejmij caly alfabet (26 znakow)
+subb $26, (%ecx) #jesli za duzy, odejmij caly alfabet (26 znakow)
 jmp check #sprawdz ponownie
 tooSmall:
-addl $26, (%ecx) #jesli za maly dodaj caly alfabet
+addb $26, (%ecx) #jesli za maly dodaj caly alfabet
 jmp check #sprawdz ponownie
 
 out:
