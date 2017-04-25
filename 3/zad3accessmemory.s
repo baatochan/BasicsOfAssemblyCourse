@@ -23,6 +23,8 @@ rdtsc
 
 movl %eax, temp
 
+xor %eax, %eax
+
 cpuid
 
 rdtsc
