@@ -6,7 +6,7 @@ myTimer:
 
 push %ebp
 mov %esp, %ebp
-
+push %ebx
 # przygotowanie do wywolania zegara
 
 xor %eax, %eax
@@ -18,7 +18,7 @@ cpuid
 rdtsc
 
 # zakonczenie funkcji
-
+pop %ebx
 mov %ebp, %esp
 pop %ebp
 

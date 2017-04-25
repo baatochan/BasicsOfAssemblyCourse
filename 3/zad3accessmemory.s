@@ -1,15 +1,37 @@
 .data
 
-number = 666
+temp: .long 0
 
 .text
 .global myAccessMemory
 myAccessMemory:
 
-# kopiowanie do rejestru
+# poczatek funkcji
 
-mov $number, %eax 
+push %ebp
+mov %esp, %ebp
+push %ebx
+# przygotowanie do wywolania zegara
 
-# return
+xor %eax, %eax
+xor %edx, %edx
+cpuid
+
+# wywolanie zegara i zapisanie go do edx:eax
+
+rdtsc
+
+movl %eax, temp
+
+cpuid
+
+rdtsc
+
+subl temp, %eax
+
+# zakonczenie funkcji
+pop %ebx
+mov %ebp, %esp
+pop %ebp
 
 ret

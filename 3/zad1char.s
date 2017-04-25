@@ -33,7 +33,7 @@ call scanf
 # wywolanie printf dla char
 # printf(&int, "%d")
 
-push (pamiec_char)
+push pamiec_char
 push $format_char
 call printf
 
