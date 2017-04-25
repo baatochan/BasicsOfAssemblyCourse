@@ -48,3 +48,5 @@ call printf
 
 mov %ebp, %esp
 pop %ebp
+
+ret
