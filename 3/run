@@ -3,23 +3,24 @@
 
 # pierwsze
 
-#gcc zad1int.s -m32 -o executable1
-#gcc zad1char.s -m32 -o executable2
-#gcc zad1string.s -m32 -o executable3
-#./executable1
-#./executable2
-#./executable3
+gcc zad1int.s -m32 -o executable1
+gcc zad1char.s -m32 -o executable2
+gcc zad1string.s -m32 -o executable3
+./executable1
+./executable2
+./executable3
 
 # drugie
 
-#as --32 zad2.s -o zad2.o
-#gcc zad2.o zad2.c -m32 -o executable
-#./executable
+gcc zad2.s zad2.c -m32 -o executable
+./executable
 
 # trzecie
 
-#as --32 zad2.s -o zad2.o
-#as --32 zad3write.s -o zad3write.o
-#as --32 zad3accessmemory.s -o zad3accessmemory.o
-#gcc zad2.o zad3write.o zad3accessmemory.o zad3.c -m32 -o executable
-#./executable
+gcc zad2.s zad3write.s zad3accessmemory.s zad3.c -m32 -o executable
+./executable
+
+# czwarte
+
+gcc zad4.s zad4.c -m32 -o executable
+./executable
