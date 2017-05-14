@@ -1,35 +1,20 @@
-#as -g calc-add.s -o outputComp.o
-#ld -g outputComp.o -o executable
-
 # pierwsze
 
-#gcc zad1int.s -m32 -o executable1
-#gcc zad1char.s -m32 -o executable2
-#gcc zad1string.s -m32 -o executable3
-#./executable1
-#./executable2
-#./executable3
+gcc zad1.s zad1.c -m32 -o executable
+./executable
 
 # drugie
 
-#gcc zad2.s zad2.c -m32 -o executable
-#./executable
+
 
 # trzecie
 
-#gcc zad2.s zad3write.s zad3accessmemory.s zad3.c -m32 -std=c99 -o executable
-#./executable
+gcc zad3.c zad3.s zad1.s -m32 -o executable
+./executable
 
 # czwarte
 
-#gcc zad4.s zad4.c -m32 -o executable
-#./executable
-
-#gcc zad1.s zad1.c -m32 -o executable
-#./executable
-
-gcc zad1.s zad3.c -m32 -o executable
-./executable
-
 gcc zad1.s zad4.c -m32 -o executable
 ./executable
+
+# piate

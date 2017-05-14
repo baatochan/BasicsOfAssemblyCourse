@@ -9,6 +9,9 @@ status: .short 0
 .type setControl, @function
 .type getStatus, @function
 getControl:
+	push %ebp
+	mov %esp, %ebp
+	push %esi
 
 	mov $control_word, %esi
 
@@ -17,12 +20,18 @@ getControl:
 
 	mov (%esi), %ax
 
+	pop %esi
+	mov %ebp, %esp
+	pop %ebp
+
 	ret
 
 setControl:
 
 	push %ebp
 	mov %esp, %ebp
+	push %ebx
+	push %esi
 
 	movl 8(%ebp), %ebx
 
@@ -34,13 +43,20 @@ setControl:
 
 	fldcw (%esi)
 
+	pop %esi
+	pop %ebx
 	mov %ebp, %esp
 	pop %ebp
 
 	ret
 
 getStatus:
+	push %ebp
+	mov %esp, %ebp
 
 	fstsw %ax
+
+	mov %ebp, %esp
+	pop %ebp
 
 	ret
