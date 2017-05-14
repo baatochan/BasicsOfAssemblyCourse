@@ -24,3 +24,8 @@ gcc zad1.s zad4.c zad4.s -m32 -o executable
 
 printf "\n"
 # piate
+
+gcc zad5.s zad5.c myTimer.s -m32 -std=c99 -o executable
+./executable
+
+printf "\n"
