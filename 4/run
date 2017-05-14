@@ -14,7 +14,7 @@ gcc zad3.c zad3.s zad1.s -m32 -o executable
 
 # czwarte
 
-gcc zad1.s zad4.c -m32 -o executable
+gcc zad1.s zad4.c zad4.s -m32 -o executable
 ./executable
 
 # piate

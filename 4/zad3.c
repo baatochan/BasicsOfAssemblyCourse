@@ -28,11 +28,11 @@ int main (void)
 	control -= 768; // - 0011 0000 0000; z 3 na 0; z extended na float
 	setControl(control);
 
-	control = getControl();
-	printf("ControlWord: %x\n", control);
-
 	result = addFloating();
 	printf("Po zmianie      : %.50f\n", result);
+
+	control = getControl();
+	printf("ControlWord: %x\n", control);
 
 	//res = val1 + val2;
 	//printf("w C: %.50f\n", res);
