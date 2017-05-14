@@ -1,20 +1,26 @@
+printf "\n"
 # pierwsze
 
 gcc zad1.s zad1.c -m32 -o executable
 ./executable
 
+printf "\n"
 # drugie
 
+gcc zad4.s zad2.c zad1.s zad2.s -m32 -o executable
+./executable
 
-
+printf "\n"
 # trzecie
 
 gcc zad3.c zad3.s zad1.s -m32 -o executable
 ./executable
 
+printf "\n"
 # czwarte
 
 gcc zad1.s zad4.c zad4.s -m32 -o executable
 ./executable
 
+printf "\n"
 # piate

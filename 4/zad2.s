@@ -1,17 +1,20 @@
 .data
 val1: .double 6.66
+val2: .double 0
 
 .text
-.global doRounding
-.type doRounding, @function
+.global divideByZero
+.type divideByZero, @function
 
-doRounding:
+divideByZero:
 push %ebp
 mov %esp, %ebp
 
+fclex
+
 fldl val1
 
-frndint
+fdivl val2;
 
 mov %ebp, %esp
 pop %ebp
