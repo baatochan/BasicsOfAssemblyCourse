@@ -1,0 +1,2 @@
+gcc showimage.c -m32 -std=c99 -lSDL-1.2 -lSDL_image-1.2 -I/usr/include/SDL -o executable
+./executable 1.bmp 40
