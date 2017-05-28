@@ -6,43 +6,44 @@
 #include "SDL.h"
 #include "SDL_image.h"
 
+//extern void fastFilter (unsigned char * buf, int width,int height,int size,char bpp);
+
 void Filter(unsigned char * buf, int width,int height,int size,char bpp) {
-	//float a = 0.5; //skalar
-	//float reakcja = 1/(1+0.5);
-	unsigned char a = 2;
+	unsigned char skalar_gora = 1;
+	unsigned char skalar_dol = 2;
 	unsigned char reakcja_gora = 2;
 	unsigned char reakcja_dol = 3;
-	int iterator = 0;
+	unsigned char przesuniecieX = 50;
+	unsigned char przesuniecieY = 0;
 
-	for (int i = 0; i < width; i++) {
-		for (int j = 0; j < height; j++) {
-			//*buf = (reakcja * (*buf)) + (reakcja * (*(buf+50)) * a);
+	for (int i = 0; i < height-przesuniecieY; i++) {
+		for (int j = 0; j < width; j++) {
 			unsigned char actual_pixel = *buf;
-			if (iterator > (width*height - ((50*width) + 50))) break; //zmienic na ograniczenie na forach
-			unsigned char moved_pixel = *(buf+50+(50*width));
+			if (i+1 >= height-przesuniecieY && j+1 >= width-przesuniecieX) break;
+			unsigned char moved_pixel = *(buf + przesuniecieX + (przesuniecieY * width));
 
-			//printf("%i %i %f %f (actual_pixel, moved_pixel, a, reakcja)\n", actual_pixel, moved_pixel, a, reakcja);
 
-			printf("%i %i ", iterator, actual_pixel);
-			actual_pixel /= reakcja_dol; //\n
+			actual_pixel /= reakcja_dol;
 			actual_pixel *= reakcja_gora;
-			printf("%i ", actual_pixel);
 
-			printf("%i ", moved_pixel);
+
 			moved_pixel /= reakcja_dol;
-			//moved_pixel /= a;
-			//moved_pixel *=  reakcja_gora;
-			printf("%i ", moved_pixel);
-			actual_pixel += moved_pixel;
-			printf("%i\n", actual_pixel);
+			/* //nie potrzeba ponieważ jest to mnozenie *2, a potem dzielenie przez 2,
+			//dla innych wartosci reakcja_gora i skalar_dol nalezy odkomentowac
+			moved_pixel *= reakcja_gora;
+			moved_pixel /= skalar_dol;//*/
 
+			/* //nie potrzeba bo skalar_gora to 1, dla innej wartosci odkomentowac
+			moved_pixel *= skalar_gora;//*/
+
+
+			actual_pixel += moved_pixel;
 			*buf = actual_pixel;
 
+
 			buf++;
-			iterator++;
 		}
 	}
-	printf("%i", width*height - ((50*width) + 50));
 };
 
 
@@ -151,8 +152,6 @@ int main(int argc, char *argv[])
 					SDL_LockSurface(image);
 
 					printf("Start filtering...  ");
-					//printf("Not so fast man :/\n");
-					//printf("%i\n", image->format->BytesPerPixel);
 					Filter(image->pixels,image->w,image->h, size, image->format->BytesPerPixel );
 					printf("Done.\n");
 
