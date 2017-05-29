@@ -6,6 +6,8 @@
 #include "SDL.h"
 #include "SDL_image.h"
 
+extern unsigned long long myTimer();
+unsigned long long startTime, endTime, workingTime;
 extern void fastFilter (unsigned char * buf, int width,int height,int size,char bpp);
 
 void Filter(unsigned char * buf, int width,int height,int size,char bpp) {
@@ -132,7 +134,7 @@ int main(int argc, char *argv[])
 
 	/* Display the image */
 	Paint(image, screen);
- 
+
 	done = 0;
 	int size =atoi( argv[2] );
 	printf("Actual size is: %d\n", size);
@@ -173,6 +175,27 @@ int main(int argc, char *argv[])
 					printf("Repainting after filtered...  ");
 					Paint(image, screen);
 					printf("Done.\n");
+					break;
+					case SDLK_h:
+						for (int i = 0; i < 10; i++) {
+							SDL_LockSurface(image);
+							startTime = myTimer();
+							Filter(image->pixels,image->w,image->h, size, image->format->BytesPerPixel );
+							endTime = myTimer();
+							workingTime = endTime - startTime;
+							printf("Wykonanie funkcji w C trwalo %llu cykli.\n", workingTime);
+							SDL_UnlockSurface(image);
+						}
+						for (int i = 0; i < 10; i++) {
+							SDL_LockSurface(image);
+							startTime = myTimer();
+							fastFilter(image->pixels,image->w,image->h, size, image->format->BytesPerPixel );
+							endTime = myTimer();
+							workingTime = endTime - startTime;
+							printf("Wykonanie funkcji w ASM trwalo %llu cykli.\n", workingTime);
+							SDL_UnlockSurface(image);
+						}
+						Paint(image, screen);
 					break;
 				    case SDLK_r:
 					printf("Reloading image...  ");
