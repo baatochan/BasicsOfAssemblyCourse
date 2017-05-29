@@ -6,13 +6,13 @@
 #include "SDL.h"
 #include "SDL_image.h"
 
-//extern void fastFilter (unsigned char * buf, int width,int height,int size,char bpp);
+extern void fastFilter (unsigned char * buf, int width,int height,int size,char bpp);
 
 void Filter(unsigned char * buf, int width,int height,int size,char bpp) {
 	unsigned char skalar_gora = 1;
-	unsigned char skalar_dol = 2;
-	unsigned char reakcja_gora = 2;
-	unsigned char reakcja_dol = 3;
+	unsigned char skalar_dol = 3;
+	unsigned char reakcja_gora = 3;
+	unsigned char reakcja_dol = 4;
 	unsigned char przesuniecieX = 50;
 	unsigned char przesuniecieY = 0;
 
@@ -28,8 +28,7 @@ void Filter(unsigned char * buf, int width,int height,int size,char bpp) {
 
 
 			moved_pixel /= reakcja_dol;
-			/* //nie potrzeba ponieważ jest to mnozenie *2, a potem dzielenie przez 2,
-			//dla innych wartosci reakcja_gora i skalar_dol nalezy odkomentowac
+			/* //nie potrzeba, zawsze beda sie znosic
 			moved_pixel *= reakcja_gora;
 			moved_pixel /= skalar_dol;//*/
 
@@ -133,7 +132,7 @@ int main(int argc, char *argv[])
 
 	/* Display the image */
 	Paint(image, screen);
-
+ 
 	done = 0;
 	int size =atoi( argv[2] );
 	printf("Actual size is: %d\n", size);
@@ -161,6 +160,19 @@ int main(int argc, char *argv[])
 					Paint(image, screen);
 					printf("Done.\n");
 
+					break;
+					case SDLK_g:
+					SDL_LockSurface(image);
+
+					printf("Start filtering...  ");
+					fastFilter(image->pixels,image->w,image->h, size, image->format->BytesPerPixel );
+					printf("Done.\n");
+
+					SDL_UnlockSurface(image);
+
+					printf("Repainting after filtered...  ");
+					Paint(image, screen);
+					printf("Done.\n");
 					break;
 				    case SDLK_r:
 					printf("Reloading image...  ");
