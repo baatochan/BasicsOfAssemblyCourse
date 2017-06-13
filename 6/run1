@@ -1,0 +1,3 @@
+rm executable
+gcc zad1.s -g -m32 -o executable
+./executable
