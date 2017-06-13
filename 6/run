@@ -1,0 +1,3 @@
+rm executable
+gcc zad3.c myTimer.s -O3 -m32 -std=c99 -o executable
+./executable
