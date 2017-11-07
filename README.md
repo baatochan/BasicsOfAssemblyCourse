@@ -1,4 +1,4 @@
-# ComputerArchitectureCourse
+# Computer Architecture Course
 AT&T Assembly code written during computer architecture course (architektura komputerów 2) at the university.
 
 Author: Bartosz Rodziewicz
