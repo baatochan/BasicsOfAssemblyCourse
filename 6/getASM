@@ -1,2 +1,0 @@
-gcc zad3.c myTimer.s -O3 -S -m32 -std=c99
-nano zad3.s

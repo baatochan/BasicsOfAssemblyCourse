@@ -1,0 +1,5 @@
+#as -g cezar.s -o temp.o
+#ld -g temp.o -o executable
+as -32 -g cezar.s -o temp.o
+ld -m elf_i386 -g temp.o -o executable
+./executable

@@ -1,0 +1,11 @@
+# pierwsze
+
+as -g calc-add.s -o outputComp.o
+ld -g outputComp.o -o executable
+./executable
+
+# drugie
+
+as -g calc-sub.s -o outputComp.o
+ld -g outputComp.o -o executable
+./executable
